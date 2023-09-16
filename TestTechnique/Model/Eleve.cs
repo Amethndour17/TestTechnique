@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
 
 namespace TestTechnique.Model;
 
 public class Eleve
 {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
     public DateTime dateCreation { get; set; }
     [Required]
@@ -18,6 +20,7 @@ public class Eleve
     [Required]
     [StringLength(100)]
     public string niveau  { get; set; }
+    public Taches Tache { get; set; }
 
 
 }

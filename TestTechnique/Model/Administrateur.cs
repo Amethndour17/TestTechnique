@@ -1,10 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Globalization;
-
-namespace TestTechnique.Model;
+﻿namespace TestTechnique.Model;
 
 public class Administrateur
 {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
     public DateTime dateCreation { get; set; }
     [Required]
@@ -18,4 +17,5 @@ public class Administrateur
     public string lieuNaissance { get; set; }
     [Required]
     public string posteAdmin { get; set; }
+  
 }

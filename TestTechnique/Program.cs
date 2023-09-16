@@ -1,3 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using TestTechnique.Data;
+using TestTechnique.Repository;
+using TestTechnique.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +11,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+//utilisation du inmemory dans notre projet par contraint d'avoir le mssql local db
+builder.Services.AddDbContext<DbContextTache>(option => option.UseInMemoryDatabase("TaskDb"));
+
+builder.Services.AddScoped<IAdminRepository, AdminRepositoryService>();
+builder.Services.AddScoped<ITaskRepository, TaskRepositorySerive>();
 
 var app = builder.Build();
 
