@@ -8,13 +8,15 @@ public class Professeur
     public DateTime dateCreation { get; set; }
     [Required]
     [StringLength(200)]
-    public string NomEtPrenom { get; set; }
+    public string? NomEtPrenom { get; set; }
     [Required]
     [StringLength(11)]
-    public string dateNaissance { get; set; }
+    public string? dateNaissance { get; set; }
     [Required]
     [StringLength(100)]
-    public string lieuNaissance { get; set; }
+    public string? lieuNaissance { get; set; }
     [Required]
     public string matiere { get; set; }
+    public int idTache { get; set; }
+    public Taches Tache { get; set; }
 }
