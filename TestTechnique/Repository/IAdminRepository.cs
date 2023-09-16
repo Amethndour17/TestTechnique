@@ -3,7 +3,7 @@ namespace TestTechnique.Repository;
 
 public interface IAdminRepository
 {
-   
+
     Task<IEnumerable<Administrateur>> GetAdministrateur();
     Task<Administrateur> GetAdminById(int adminId);
     Task<Administrateur> AddAdmin(Administrateur admin);

@@ -11,12 +11,12 @@ public class AdminRepositoryService : IAdminRepository
         this._context = context;
     }
 
-    public async Task<IEnumerable<Administrateur>> GetAdmin()
+    public async Task<IEnumerable<Administrateur>> GetAdministrateur()
     {
         return await _context.Administrateurs.ToListAsync();
     }
 
-    public async Task<Administrateur> GetByIdAdmin(int admin)
+    public async Task<Administrateur> GetAdminById(int admin)
     {
         return await _context.Administrateurs
             .FirstOrDefaultAsync(e => e.Id == admin);
