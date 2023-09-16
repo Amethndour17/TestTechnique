@@ -74,6 +74,26 @@ namespace TestTechnique.Controllers
                     "Erreur de mise à jour");
             }
         }
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<Task>> DeleteTask(int id)
+        {
+            try
+            {
+                var admin = await _repository.GetTaskById(id);
+
+                if (admin == null)
+                {
+                    return NotFound();
+                }
+
+                return await _repository.DeleteTask(id);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error server");
+            }
+        }
     }
     
 
