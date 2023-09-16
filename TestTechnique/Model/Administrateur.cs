@@ -17,5 +17,4 @@ public class Administrateur
     public string lieuNaissance { get; set; }
     [Required]
     public string posteAdmin { get; set; }
-  
 }

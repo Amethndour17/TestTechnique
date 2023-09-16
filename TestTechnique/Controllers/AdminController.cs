@@ -6,7 +6,7 @@ namespace TestTechnique.Controllers
     public class AdminController : ControllerBase
     {
         private readonly IAdminRepository _repository;
-        public AdminController(IAdminRepository repository)
+        public  AdminController(IAdminRepository repository)
         {
             _repository = repository;
         }
@@ -16,7 +16,7 @@ namespace TestTechnique.Controllers
             return Ok(await _repository.GetAdministrateur());
         }
         [HttpPost]
-        public async Task<ActionResult<Administrateur>> CreateEmployee(Administrateur admin)
+        public async Task<ActionResult<Administrateur>> CreateAdmin(Administrateur admin)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace TestTechnique.Controllers
             }
 
 
-        }
-
     }
+   
+}
 }

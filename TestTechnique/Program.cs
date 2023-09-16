@@ -15,8 +15,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DbContextTache>(option => option.UseInMemoryDatabase("TaskDb"));
 
 builder.Services.AddScoped<IAdminRepository, AdminRepositoryService>();
-builder.Services.AddScoped<ITaskRepository, TaskRepositorySerive>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

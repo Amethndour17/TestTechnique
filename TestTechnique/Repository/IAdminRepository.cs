@@ -1,5 +1,4 @@
 ﻿
-
 namespace TestTechnique.Repository;
 
 public interface IAdminRepository

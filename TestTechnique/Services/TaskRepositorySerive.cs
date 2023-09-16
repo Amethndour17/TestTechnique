@@ -2,17 +2,14 @@
 
 namespace TestTechnique.Services;
 
-public class TaskRepositorySerive : ITaskRepository, AdminRepositoryService
+public class TaskRepositorySerive : ITaskRepository
 {
     private readonly DbContextTache _context;
-    private readonly AdminRepositoryService _service;
 
 
-    public TaskRepositorySerive(DbContextTache context, AdminRepositoryService service)
+    public TaskRepositorySerive(DbContextTache context)
     {
         _context = context;
-        _service = service;
-
     }
 
     public async Task<IEnumerable<Taches>> GetTask()

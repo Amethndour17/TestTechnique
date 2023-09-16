@@ -1,5 +1,4 @@
 ﻿
-
 namespace TestTechnique.Model;
 
 public class Taches

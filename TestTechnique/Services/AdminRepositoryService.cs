@@ -1,4 +1,5 @@
-﻿
+
+
 namespace TestTechnique.Services;
 
 public class AdminRepositoryService : IAdminRepository
@@ -10,12 +11,12 @@ public class AdminRepositoryService : IAdminRepository
         this._context = context;
     }
 
-    public async Task<IEnumerable<Administrateur>> GetAdministrateur()
+    public async Task<IEnumerable<Administrateur>> GetAdmin()
     {
         return await _context.Administrateurs.ToListAsync();
     }
 
-    public async Task<Administrateur> GetAdminById(int admin)
+    public async Task<Administrateur> GetByIdAdmin(int admin)
     {
         return await _context.Administrateurs
             .FirstOrDefaultAsync(e => e.Id == admin);
@@ -23,25 +24,23 @@ public class AdminRepositoryService : IAdminRepository
 
     public async Task<Administrateur> AddAdmin(Administrateur admin)
     {
-
         var result = await _context.Administrateurs.AddAsync(admin);
         await _context.SaveChangesAsync();
         return result.Entity;
     }
 
-    public async Task<Administrateur> UpdateAdmin(Administrateur admin)
+    public async Task<Administrateur?> UpdateAdmin(Administrateur admin)
     {
         var result = await _context.Administrateurs
             .FirstOrDefaultAsync(e => e.Id == admin.Id);
 
         if (result != null)
-        { 
-             result.dateCreation = admin.dateCreation;
-             result.NomEtPrenom = admin.NomEtPrenom;
+        {
+            result.dateCreation = admin.dateCreation;
+            result.NomEtPrenom = admin.NomEtPrenom;
             result.dateNaissance = admin.dateNaissance;
             result.lieuNaissance = admin.lieuNaissance;
             result.posteAdmin = admin.posteAdmin;
-            
             await _context.SaveChangesAsync();
 
             return result;
@@ -61,5 +60,13 @@ public class AdminRepositoryService : IAdminRepository
         }
     }
 
-  }
+    Task<IEnumerable<Administrateur>> IAdminRepository.GetAdministrateur()
+    {
+        throw new NotImplementedException();
+    }
 
+    Task<Administrateur> IAdminRepository.GetAdminById(int adminId)
+    {
+        throw new NotImplementedException();
+    }
+}
