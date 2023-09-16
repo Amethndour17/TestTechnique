@@ -54,7 +54,7 @@ public class TaskRepositorySerive : ITaskRepository
         return null;
     }
 
-    public async void DeleteTask(int id)
+    public async Task<Administrateur?> DeleteTask(int id)
     {
         var result = await _context.Tache
             .FirstOrDefaultAsync(e => e.Id == id);

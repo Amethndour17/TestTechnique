@@ -20,7 +20,7 @@ public class Eleve
     [Required]
     [StringLength(100)]
     public string niveau  { get; set; }
-    public Taches Tache { get; set; }
+   
 
 
 }

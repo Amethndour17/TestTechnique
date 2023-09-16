@@ -1,32 +1,34 @@
-﻿
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
 namespace TestTechnique.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AdminController : ControllerBase
+    public class EleveController : ControllerBase
     {
-        private readonly IAdminRepository _repository;
-        public AdminController(IAdminRepository repository)
+        private readonly IEleveRepository _repository;
+        public EleveController(IEleveRepository repository)
         {
             _repository = repository;
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Administrateur>>> GetAllAdmin()
+        public async Task<ActionResult<IEnumerable<Eleve>>> GetAllEleve()
         {
-            return Ok(await _repository.GetAdministrateur());
+            return Ok(await _repository.GetEleve());
         }
         [HttpPost]
-        public async Task<ActionResult<Administrateur>> CreateAdmin(Administrateur admin)
+        public async Task<ActionResult<Eleve>> CreateProf(Eleve eleve)
         {
             try
             {
-                if (admin == null)
+                if (eleve == null)
                     return BadRequest();
 
-                var createTask = await _repository.AddAdmin(admin);
+                var createEleve = await _repository.AddEleve(eleve);
 
-                return CreatedAtAction(nameof(GetAllAdmin),
-                    new { id = createTask.Id }, createTask);
+                return CreatedAtAction(nameof(GetAllEleve),
+                    new { id = createEleve.Id }, createEleve);
             }
             catch (Exception)
             {
@@ -36,11 +38,11 @@ namespace TestTechnique.Controllers
 
         }
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<Administrateur>> GetAdminById(int id)
+        public async Task<ActionResult<Eleve>> GetGetById(int id)
         {
             try
             {
-                var result = await _repository.GetAdminById(id);
+                var result = await _repository.GetEleveById(id);
 
                 if (result == null) return NotFound();
 
@@ -53,19 +55,19 @@ namespace TestTechnique.Controllers
             }
         }
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<Administrateur>> UpdateAdmin(int id, Administrateur admin)
+        public async Task<ActionResult<Eleve>> UpdateProf(int id, Eleve eleve)
         {
             try
             {
-                if (id != admin.Id)
+                if (id != eleve.Id)
                     return BadRequest();
 
-                var admins = await _repository.GetAdministrateur();
+                var profs = await _repository.GetEleve();
 
-                if (admins == null)
+                if (profs == null)
                     return NotFound();
 
-                return await _repository.UpdateAdmin(admin);
+                return await _repository.UpdateEleve(eleve);
             }
             catch (Exception)
             {
@@ -74,18 +76,18 @@ namespace TestTechnique.Controllers
             }
         }
         [HttpDelete("{id:int}")]
-        public async Task<ActionResult<Administrateur>> DeleteAdmin(int adminId)
+        public async Task<ActionResult<Eleve>> DeleteAdmin(int eleve)
         {
             try
             {
-                var admin = await _repository.GetAdminById(adminId);
+                var eleves = await _repository.GetEleveById(eleve);
 
-                if (admin == null)
+                if (eleves == null)
                 {
                     return NotFound();
                 }
 
-                return await _repository.DeleteAdmin(adminId);
+                return await _repository.DeletEleve(eleve);
             }
             catch (Exception)
             {
@@ -95,4 +97,4 @@ namespace TestTechnique.Controllers
         }
     }
 }
-
+}

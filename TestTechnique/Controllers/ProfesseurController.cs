@@ -1,32 +1,34 @@
-﻿
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
 namespace TestTechnique.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AdminController : ControllerBase
+    public class ProfesseurController : ControllerBase
     {
-        private readonly IAdminRepository _repository;
-        public AdminController(IAdminRepository repository)
+        private readonly IProfesseurRepository _repository;
+        public ProfesseurController(IProfesseurRepository repository)
         {
             _repository = repository;
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Administrateur>>> GetAllAdmin()
+        public async Task<ActionResult<IEnumerable<Professeur>>> GetAllProfesseur()
         {
-            return Ok(await _repository.GetAdministrateur());
+            return Ok(await _repository.GetProfesseur());
         }
         [HttpPost]
-        public async Task<ActionResult<Administrateur>> CreateAdmin(Administrateur admin)
+        public async Task<ActionResult<Professeur>> CreateProf(Professeur prof)
         {
             try
             {
-                if (admin == null)
+                if (prof == null)
                     return BadRequest();
 
-                var createTask = await _repository.AddAdmin(admin);
+                var createProf = await _repository.AddProfesseur(prof);
 
-                return CreatedAtAction(nameof(GetAllAdmin),
-                    new { id = createTask.Id }, createTask);
+                return CreatedAtAction(nameof(GetAllProfesseur),
+                    new { id = createProf.Id }, createProf);
             }
             catch (Exception)
             {
@@ -36,11 +38,11 @@ namespace TestTechnique.Controllers
 
         }
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<Administrateur>> GetAdminById(int id)
+        public async Task<ActionResult<Professeur>> GetAdminById(int id)
         {
             try
             {
-                var result = await _repository.GetAdminById(id);
+                var result = await _repository.GetProfesseurById(id);
 
                 if (result == null) return NotFound();
 
@@ -53,19 +55,19 @@ namespace TestTechnique.Controllers
             }
         }
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<Administrateur>> UpdateAdmin(int id, Administrateur admin)
+        public async Task<ActionResult<Administrateur>> UpdateProf(int id, Professeur prof)
         {
             try
             {
-                if (id != admin.Id)
+                if (id != prof.Id)
                     return BadRequest();
 
-                var admins = await _repository.GetAdministrateur();
+                var profs = await _repository.GetProfesseur();
 
-                if (admins == null)
+                if (profs == null)
                     return NotFound();
 
-                return await _repository.UpdateAdmin(admin);
+                return await _repository.UpdateProfesseur(profs);
             }
             catch (Exception)
             {
@@ -74,18 +76,18 @@ namespace TestTechnique.Controllers
             }
         }
         [HttpDelete("{id:int}")]
-        public async Task<ActionResult<Administrateur>> DeleteAdmin(int adminId)
+        public async Task<ActionResult<Administrateur>> DeleteAdmin(int prof)
         {
             try
             {
-                var admin = await _repository.GetAdminById(adminId);
+                var profs = await _repository.GetProfesseurById(prof);
 
-                if (admin == null)
+                if (profs == null)
                 {
                     return NotFound();
                 }
 
-                return await _repository.DeleteAdmin(adminId);
+                return await _repository.DeleteAdmin(profs);
             }
             catch (Exception)
             {
@@ -95,4 +97,3 @@ namespace TestTechnique.Controllers
         }
     }
 }
-

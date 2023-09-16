@@ -18,6 +18,5 @@ public class Professeur
     public string? lieuNaissance { get; set; }
     [Required]
     public string matiere { get; set; }
-    public int idTache { get; set; }
-    public Taches Tache { get; set; }
+    
 }
